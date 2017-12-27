@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CPU卡操作-IC卡读卡器云服务Web开发应用实例</title>
+<meta name="keywords" content="IC卡读卡器，WEB开发，WEB读卡器，firefox与IC卡读卡器，BS与IC卡读卡器" />
+<meta name="description" content="BS下网页浏览器使用IC卡读卡器的方法，IC卡读卡器的web例子"/>
+<style type="text/css">
+.titlecenter {
+	text-align: center;
+}
+.lstSamples {
+	padding-top: 10px;
+	padding-right: 10%;
+	padding-bottom: 10px;
+	padding-left: 10%;
+}
+.maintext {
+	padding-right: 10%;
+	padding-left: 10%;
+}
+</style>
+</head>
+
+<script language="javascript" src="http://127.0.0.1:8008/YOWOCloudRFIDReader.js"></script>
+<script language="javascript" src="static/js/YOWOReaderBase.js"></script>
+<script language="javascript" type="text/javascript">
+rfidreader.onResult(function(resultdata)
+{
+	var str;
+	switch(resultdata.FunctionID)
+    {
+    	
+		case 14:
+        document.getElementById("CloudReaderVer").value = resultdata.strData;
+        break;
+		case 20:
+		if(resultdata.Result>0)
+		{
+			str =resultdata.strData;
+		}
+		else
+		{
+			str= GetErrStr(resultdata.Result);
+		}
+		document.getElementById("CardNo").value = str;
+
+		break;
+		case 34:
+
+		if(resultdata.Result>0)
+		{
+			str =resultdata.strData;
+
+			document.getElementById("CardNo2").value = str.substring(0,16);
+			document.getElementById("CardNo3").value = str.substring(16,18);
+			document.getElementById("CardNo4").value = str.substring(18,20);
+			document.getElementById("CardNo5").value = str.substring(20,40);
+			document.getElementById("CardNo6").value = str.substring(40,48);
+			document.getElementById("CardNo7").value = str.substring(48,56);
+			document.getElementById("CardNo8").value = str.substring(56,58);
+			document.getElementById("CardNo9").value = str.substring(58,60);		
+		}
+		else
+		{
+			str= GetErrStr(resultdata.Result);
+			document.getElementById("CardNo2").value = str;
+			document.getElementById("CardNo3").value = "";
+			document.getElementById("CardNo4").value = "";
+			document.getElementById("CardNo5").value = "";
+			document.getElementById("CardNo6").value = "";
+			document.getElementById("CardNo7").value = "";
+			document.getElementById("CardNo8").value = "";
+			document.getElementById("CardNo9").value = "";
+		}
+	
+		break;		
+    }
+}
+);
+
+function CPUReset()
+{
+	rfidreader.Repeat=0;
+	rfidreader.HaltAfterSuccess=0;
+	rfidreader.SAMReset(3);
+	
+	
+}
+
+function CPUCos()
+{
+	rfidreader.Repeat=0;
+	rfidreader.HaltAfterSuccess=0;
+	rfidreader.SinoPecCard_GetInfo();	
+}
+
+
+</script>
+<body>
+<h1 class="titlecenter">友我科技IC卡读卡器云服务Web开发应用实例</h1>
+<p class="maintext"><a href="index.htm">开发指南</a>   <a href="CloudReaderSamples.html">例程目录</a></p>
+<hr />
+<p class="maintext" >此实例将获取中石油,中石化加油卡相关信息。</p>
+<p class="maintext" >友我科技IC卡读卡器云服务版本号：
+  <input name="CloudReaderVer" type="text" id="CloudReaderVer" maxlength="10" readonly="readonly" />最新版本：2.0.2.0
+</p>
+<p class="maintext" >
+  <input type="submit" name="btnReset" id="btnReset" value="加油卡复位"  onclick="CPUReset()" />
+  ATR
+  :
+<input name="CardNo" type="text" id="CardNo" size="50" maxlength="50" readonly="readonly" />
+</p>
+<p class="maintext" >
+  <input type="submit" name="btnCOS" id="btnCOS"  value="加油卡信息"  onclick="CPUCos()" />
+</p>
+<p class="maintext">执行结果信息：</p>
+<p class="maintext">发卡方标示:
+  <input name="CardNo2" type="text" id="CardNo2" size="50" maxlength="50" readonly="readonly" />
+</p>
+<p class="maintext">应用类型标示:
+    <input name="CardNo3" type="text" id="CardNo3" size="50" maxlength="50" readonly="readonly" />
+</p>
+<p class="maintext">应用版本:
+  <input name="CardNo4" type="text" id="CardNo4" size="50" maxlength="50" readonly="readonly" />
+</p>
+<p class="maintext">应 用序列号:
+  <input name="CardNo5" type="text" id="CardNo5" size="50" maxlength="50" readonly="readonly" />
+</p>
+<p  class="maintext">应用启用日期:
+  <input name="CardNo6" type="text" id="CardNo6" size="50" maxlength="50" readonly="readonly" />
+</p>
+<p  class="maintext">应用有效日期:
+  <input name="CardNo7" type="text" id="CardNo7" size="50" maxlength="50" readonly="readonly" />
+</p>
+<p  class="maintext">指令集版本:
+  <input name="CardNo8" type="text" id="CardNo8" size="50" maxlength="50" readonly="readonly" />
+</p>
+<p  class="maintext">FCI数据:
+  <input name="CardNo9" type="text" id="CardNo9" size="50" maxlength="50" readonly="readonly" />
+</p>
+
+
+
+
+
+
+</body>
+</html>

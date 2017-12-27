@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.mapper.AttributesMapper" >
+  <resultMap id="BaseResultMap" type="com.user.po.Attributes" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PRODUCTNO" property="productno" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTEID" property="attributeid" jdbcType="INTEGER" />
+    <result column="ATTRIBUTES" property="attributes" jdbcType="VARCHAR" />
+    <result column="ISUSED" property="isused" jdbcType="INTEGER" />
+    <result column="TIPS" property="tips" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PRODUCTNO, ATTRIBUTEID, ATTRIBUTES, ISUSED, TIPS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ATTRIBUTES
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ATTRIBUTES
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.user.po.Attributes" >
+    insert into ATTRIBUTES (ID, PRODUCTNO, ATTRIBUTEID, 
+      ATTRIBUTES, ISUSED, TIPS
+      )
+    values (#{id,jdbcType=INTEGER}, #{productno,jdbcType=VARCHAR}, #{attributeid,jdbcType=INTEGER}, 
+      #{attributes,jdbcType=VARCHAR}, #{isused,jdbcType=INTEGER}, #{tips,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.user.po.Attributes" >
+    insert into ATTRIBUTES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="productno != null" >
+        PRODUCTNO,
+      </if>
+      <if test="attributeid != null" >
+        ATTRIBUTEID,
+      </if>
+      <if test="attributes != null" >
+        ATTRIBUTES,
+      </if>
+      <if test="isused != null" >
+        ISUSED,
+      </if>
+      <if test="tips != null" >
+        TIPS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="attributeid != null" >
+        #{attributeid,jdbcType=INTEGER},
+      </if>
+      <if test="attributes != null" >
+        #{attributes,jdbcType=VARCHAR},
+      </if>
+      <if test="isused != null" >
+        #{isused,jdbcType=INTEGER},
+      </if>
+      <if test="tips != null" >
+        #{tips,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.user.po.Attributes" >
+    update ATTRIBUTES
+    <set >
+      <if test="productno != null" >
+        PRODUCTNO = #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="attributeid != null" >
+        ATTRIBUTEID = #{attributeid,jdbcType=INTEGER},
+      </if>
+      <if test="attributes != null" >
+        ATTRIBUTES = #{attributes,jdbcType=VARCHAR},
+      </if>
+      <if test="isused != null" >
+        ISUSED = #{isused,jdbcType=INTEGER},
+      </if>
+      <if test="tips != null" >
+        TIPS = #{tips,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.user.po.Attributes" >
+    update ATTRIBUTES
+    set PRODUCTNO = #{productno,jdbcType=VARCHAR},
+      ATTRIBUTEID = #{attributeid,jdbcType=INTEGER},
+      ATTRIBUTES = #{attributes,jdbcType=VARCHAR},
+      ISUSED = #{isused,jdbcType=INTEGER},
+      TIPS = #{tips,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

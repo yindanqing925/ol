@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.mapper.ItemMapper" >
+  <resultMap id="BaseResultMap" type="com.user.po.Item" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ORDERNO" property="orderno" jdbcType="VARCHAR" />
+    <result column="PRODUCTNO" property="productno" jdbcType="VARCHAR" />
+    <result column="PRRICE" property="prrice" jdbcType="DOUBLE" />
+    <result column="QUANTITY" property="quantity" jdbcType="INTEGER" />
+    <result column="TOTAL" property="total" jdbcType="DOUBLE" />
+    <result column="CREATEDBY" property="createdby" jdbcType="INTEGER" />
+    <result column="UPDATEDBY" property="updatedby" jdbcType="INTEGER" />
+    <result column="ITEMYIPS" property="itemyips" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ORDERNO, PRODUCTNO, PRRICE, QUANTITY, TOTAL, CREATEDBY, UPDATEDBY, ITEMYIPS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ITEM
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ITEM
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.user.po.Item" >
+    insert into ITEM (ID, ORDERNO, PRODUCTNO, 
+      PRRICE, QUANTITY, TOTAL, 
+      CREATEDBY, UPDATEDBY, ITEMYIPS
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderno,jdbcType=VARCHAR}, #{productno,jdbcType=VARCHAR}, 
+      #{prrice,jdbcType=DOUBLE}, #{quantity,jdbcType=INTEGER}, #{total,jdbcType=DOUBLE}, 
+      #{createdby,jdbcType=INTEGER}, #{updatedby,jdbcType=INTEGER}, #{itemyips,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.user.po.Item" >
+    insert into ITEM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderno != null" >
+        ORDERNO,
+      </if>
+      <if test="productno != null" >
+        PRODUCTNO,
+      </if>
+      <if test="prrice != null" >
+        PRRICE,
+      </if>
+      <if test="quantity != null" >
+        QUANTITY,
+      </if>
+      <if test="total != null" >
+        TOTAL,
+      </if>
+      <if test="createdby != null" >
+        CREATEDBY,
+      </if>
+      <if test="updatedby != null" >
+        UPDATEDBY,
+      </if>
+      <if test="itemyips != null" >
+        ITEMYIPS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="prrice != null" >
+        #{prrice,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="createdby != null" >
+        #{createdby,jdbcType=INTEGER},
+      </if>
+      <if test="updatedby != null" >
+        #{updatedby,jdbcType=INTEGER},
+      </if>
+      <if test="itemyips != null" >
+        #{itemyips,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.user.po.Item" >
+    update ITEM
+    <set >
+      <if test="orderno != null" >
+        ORDERNO = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        PRODUCTNO = #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="prrice != null" >
+        PRRICE = #{prrice,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        QUANTITY = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        TOTAL = #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="createdby != null" >
+        CREATEDBY = #{createdby,jdbcType=INTEGER},
+      </if>
+      <if test="updatedby != null" >
+        UPDATEDBY = #{updatedby,jdbcType=INTEGER},
+      </if>
+      <if test="itemyips != null" >
+        ITEMYIPS = #{itemyips,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.user.po.Item" >
+    update ITEM
+    set ORDERNO = #{orderno,jdbcType=VARCHAR},
+      PRODUCTNO = #{productno,jdbcType=VARCHAR},
+      PRRICE = #{prrice,jdbcType=DOUBLE},
+      QUANTITY = #{quantity,jdbcType=INTEGER},
+      TOTAL = #{total,jdbcType=DOUBLE},
+      CREATEDBY = #{createdby,jdbcType=INTEGER},
+      UPDATEDBY = #{updatedby,jdbcType=INTEGER},
+      ITEMYIPS = #{itemyips,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

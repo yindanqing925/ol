@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.mapper.StoreMapper" >
+  <resultMap id="BaseResultMap" type="com.user.po.Store" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="STORENAME" property="storename" jdbcType="VARCHAR" />
+    <result column="STOREOWNER" property="storeowner" jdbcType="INTEGER" />
+    <result column="AMOUNTS" property="amounts" jdbcType="DOUBLE" />
+    <result column="AMOUNTSMON" property="amountsmon" jdbcType="DOUBLE" />
+    <result column="CREATED" property="created" jdbcType="TIMESTAMP" />
+    <result column="ADRESS" property="adress" jdbcType="VARCHAR" />
+    <result column="CHANNEL" property="channel" jdbcType="VARCHAR" />
+    <result column="TIPS" property="tips" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, STORENAME, STOREOWNER, AMOUNTS, AMOUNTSMON, CREATED, ADRESS, CHANNEL, TIPS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from STORE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from STORE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.user.po.Store" >
+    insert into STORE (ID, STORENAME, STOREOWNER, 
+      AMOUNTS, AMOUNTSMON, CREATED, 
+      ADRESS, CHANNEL, TIPS
+      )
+    values (#{id,jdbcType=INTEGER}, #{storename,jdbcType=VARCHAR}, #{storeowner,jdbcType=INTEGER}, 
+      #{amounts,jdbcType=DOUBLE}, #{amountsmon,jdbcType=DOUBLE}, #{created,jdbcType=TIMESTAMP}, 
+      #{adress,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{tips,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.user.po.Store" >
+    insert into STORE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="storename != null" >
+        STORENAME,
+      </if>
+      <if test="storeowner != null" >
+        STOREOWNER,
+      </if>
+      <if test="amounts != null" >
+        AMOUNTS,
+      </if>
+      <if test="amountsmon != null" >
+        AMOUNTSMON,
+      </if>
+      <if test="created != null" >
+        CREATED,
+      </if>
+      <if test="adress != null" >
+        ADRESS,
+      </if>
+      <if test="channel != null" >
+        CHANNEL,
+      </if>
+      <if test="tips != null" >
+        TIPS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="storename != null" >
+        #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="storeowner != null" >
+        #{storeowner,jdbcType=INTEGER},
+      </if>
+      <if test="amounts != null" >
+        #{amounts,jdbcType=DOUBLE},
+      </if>
+      <if test="amountsmon != null" >
+        #{amountsmon,jdbcType=DOUBLE},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adress != null" >
+        #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        #{tips,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.user.po.Store" >
+    update STORE
+    <set >
+      <if test="storename != null" >
+        STORENAME = #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="storeowner != null" >
+        STOREOWNER = #{storeowner,jdbcType=INTEGER},
+      </if>
+      <if test="amounts != null" >
+        AMOUNTS = #{amounts,jdbcType=DOUBLE},
+      </if>
+      <if test="amountsmon != null" >
+        AMOUNTSMON = #{amountsmon,jdbcType=DOUBLE},
+      </if>
+      <if test="created != null" >
+        CREATED = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adress != null" >
+        ADRESS = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        CHANNEL = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        TIPS = #{tips,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.user.po.Store" >
+    update STORE
+    set STORENAME = #{storename,jdbcType=VARCHAR},
+      STOREOWNER = #{storeowner,jdbcType=INTEGER},
+      AMOUNTS = #{amounts,jdbcType=DOUBLE},
+      AMOUNTSMON = #{amountsmon,jdbcType=DOUBLE},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      ADRESS = #{adress,jdbcType=VARCHAR},
+      CHANNEL = #{channel,jdbcType=VARCHAR},
+      TIPS = #{tips,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

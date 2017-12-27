@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.mapper.ProductsMapper" >
+  <resultMap id="BaseResultMap" type="com.user.po.Products" >
+    <result column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PRODUCTNO" property="productno" jdbcType="VARCHAR" />
+    <result column="CREATEDBY" property="createdby" jdbcType="INTEGER" />
+    <result column="CREATEDDATE" property="createddate" jdbcType="TIMESTAMP" />
+    <result column="PRODUCTNAME" property="productname" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="DOUBLE" />
+    <result column="PRODINTRO" property="prodintro" jdbcType="VARCHAR" />
+    <result column="PRODDETAIL" property="proddetail" jdbcType="VARCHAR" />
+    <result column="UPDATEDBY" property="updatedby" jdbcType="INTEGER" />
+    <result column="UPDATEDDATE" property="updateddate" jdbcType="CHAR" />
+    <result column="ISSEEN" property="isseen" jdbcType="INTEGER" />
+    <result column="ATTRIBUTES" property="attributes" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.user.po.Products" >
+    insert into PRODUCTS (ID, PRODUCTNO, CREATEDBY, 
+      CREATEDDATE, PRODUCTNAME, PRICE, 
+      PRODINTRO, PRODDETAIL, UPDATEDBY, 
+      UPDATEDDATE, ISSEEN, ATTRIBUTES
+      )
+    values (#{id,jdbcType=INTEGER}, #{productno,jdbcType=VARCHAR}, #{createdby,jdbcType=INTEGER}, 
+      #{createddate,jdbcType=TIMESTAMP}, #{productname,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{prodintro,jdbcType=VARCHAR}, #{proddetail,jdbcType=VARCHAR}, #{updatedby,jdbcType=INTEGER}, 
+      #{updateddate,jdbcType=CHAR}, #{isseen,jdbcType=INTEGER}, #{attributes,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.user.po.Products" >
+    insert into PRODUCTS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="productno != null" >
+        PRODUCTNO,
+      </if>
+      <if test="createdby != null" >
+        CREATEDBY,
+      </if>
+      <if test="createddate != null" >
+        CREATEDDATE,
+      </if>
+      <if test="productname != null" >
+        PRODUCTNAME,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="prodintro != null" >
+        PRODINTRO,
+      </if>
+      <if test="proddetail != null" >
+        PRODDETAIL,
+      </if>
+      <if test="updatedby != null" >
+        UPDATEDBY,
+      </if>
+      <if test="updateddate != null" >
+        UPDATEDDATE,
+      </if>
+      <if test="isseen != null" >
+        ISSEEN,
+      </if>
+      <if test="attributes != null" >
+        ATTRIBUTES,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="createdby != null" >
+        #{createdby,jdbcType=INTEGER},
+      </if>
+      <if test="createddate != null" >
+        #{createddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="prodintro != null" >
+        #{prodintro,jdbcType=VARCHAR},
+      </if>
+      <if test="proddetail != null" >
+        #{proddetail,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedby != null" >
+        #{updatedby,jdbcType=INTEGER},
+      </if>
+      <if test="updateddate != null" >
+        #{updateddate,jdbcType=CHAR},
+      </if>
+      <if test="isseen != null" >
+        #{isseen,jdbcType=INTEGER},
+      </if>
+      <if test="attributes != null" >
+        #{attributes,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

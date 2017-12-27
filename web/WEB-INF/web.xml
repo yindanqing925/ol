@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>ol</display-name>
+	<!-- Spring和mybatis的配置文件 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring-mybatis.xml</param-value>
+	</context-param>
+	<!-- Spring监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 防止Spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- Spring MVC servlet -->
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<!-- 打开资源缺口 -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>
+			/static/*
+		</url-pattern>
+	</servlet-mapping>
+
+	<!-- 编码过滤器 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>/index.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- el表达式
+	<jsp-config>
+		<el-ignored>false</el-ignored>
+	</jsp-config>
+	 -->
+	<!-- 常量注入-->
+	<listener>
+		<listener-class>com.setup.ApplicationValues</listener-class>
+	</listener>
+	
+	<!-- 授权调度 -->
+	<listener>
+		<listener-class>com.setup.Accredit</listener-class>
+	</listener>
+  
+  
+  <!-- 管理员过滤 -->
+  <filter>
+      <filter-name>admin</filter-name>
+      <filter-class>com.filter.AdminFilter</filter-class>
+  </filter>
+  <filter-mapping>
+      <filter-name>admin</filter-name>
+       <dispatcher>REQUEST</dispatcher>
+ 	   <dispatcher>FORWARD</dispatcher>
+      <url-pattern>/WEB-INF/jsp/admin/addUser.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>admin</filter-name>
+       <dispatcher>REQUEST</dispatcher>
+ 	   <dispatcher>FORWARD</dispatcher>
+      <url-pattern>/WEB-INF/jsp/admin/adminMain.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>admin</filter-name>
+       <dispatcher>REQUEST</dispatcher>
+ 	   <dispatcher>FORWARD</dispatcher>
+      <url-pattern>/WEB-INF/jsp/admin/advises.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>admin</filter-name>
+       <dispatcher>REQUEST</dispatcher>
+ 	   <dispatcher>FORWARD</dispatcher>
+      <url-pattern>/WEB-INF/jsp/admin/readCard.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>admin</filter-name>
+       <dispatcher>REQUEST</dispatcher>
+ 	   <dispatcher>FORWARD</dispatcher>
+      <url-pattern>/WEB-INF/jsp/admin/userEdit.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>admin</filter-name>
+       <dispatcher>REQUEST</dispatcher>
+ 	   <dispatcher>FORWARD</dispatcher>
+      <url-pattern>/WEB-INF/jsp/admin/userManager.jsp</url-pattern>
+  </filter-mapping>
+  
+  
+  <!-- 用户过滤 -->
+  <filter>
+      <filter-name>useable</filter-name>
+      <filter-class>com.filter.UseableFilter</filter-class>
+  </filter>
+  <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/advise.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/alterPwd.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/body.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/content.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/header.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/limit.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/menu.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/moneyquery.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/spendlist.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/userInfo.jsp</url-pattern>
+  </filter-mapping>
+    <filter-mapping>
+      <filter-name>useable</filter-name>
+      <url-pattern>/WEB-INF/jsp/userinfo/userMain.jsp</url-pattern>
+  </filter-mapping>
+  
+  <!-- 授权过滤器 -->
+    <filter>
+      <filter-name>accredit</filter-name>
+      <filter-class>com.filter.AccreditFilter</filter-class>
+  </filter>
+  <filter-mapping>
+      <filter-name>accredit</filter-name>
+      <dispatcher>REQUEST</dispatcher>
+ 	  <dispatcher>FORWARD</dispatcher>
+      <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+  
+</web-app>

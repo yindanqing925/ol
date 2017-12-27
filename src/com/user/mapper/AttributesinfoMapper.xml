@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.mapper.AttributesinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.user.po.Attributesinfo" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ATTRIBUTENAME" property="attributename" jdbcType="CHAR" />
+    <result column="ATTRTIPS" property="attrtips" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ATTRIBUTENAME, ATTRTIPS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ATTRIBUTESINFO
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ATTRIBUTESINFO
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.user.po.Attributesinfo" >
+    insert into ATTRIBUTESINFO (ID, ATTRIBUTENAME, ATTRTIPS
+      )
+    values (#{id,jdbcType=INTEGER}, #{attributename,jdbcType=CHAR}, #{attrtips,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.user.po.Attributesinfo" >
+    insert into ATTRIBUTESINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="attributename != null" >
+        ATTRIBUTENAME,
+      </if>
+      <if test="attrtips != null" >
+        ATTRTIPS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="attributename != null" >
+        #{attributename,jdbcType=CHAR},
+      </if>
+      <if test="attrtips != null" >
+        #{attrtips,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.user.po.Attributesinfo" >
+    update ATTRIBUTESINFO
+    <set >
+      <if test="attributename != null" >
+        ATTRIBUTENAME = #{attributename,jdbcType=CHAR},
+      </if>
+      <if test="attrtips != null" >
+        ATTRTIPS = #{attrtips,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.user.po.Attributesinfo" >
+    update ATTRIBUTESINFO
+    set ATTRIBUTENAME = #{attributename,jdbcType=CHAR},
+      ATTRTIPS = #{attrtips,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

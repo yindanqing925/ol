@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.user.po.Orders" >
+    <id column="ORDERID" property="orderid" jdbcType="INTEGER" />
+    <result column="CREATEDBY" property="createdby" jdbcType="INTEGER" />
+    <result column="ORDERDATE" property="orderdate" jdbcType="TIMESTAMP" />
+    <result column="ORDERNO" property="orderno" jdbcType="VARCHAR" />
+    <result column="ORDSTATUS" property="ordstatus" jdbcType="INTEGER" />
+    <result column="AMOUNT" property="amount" jdbcType="DOUBLE" />
+    <result column="ADRESS" property="adress" jdbcType="INTEGER" />
+    <result column="STOREID" property="storeid" jdbcType="INTEGER" />
+    <result column="CONFIRMBY" property="confirmby" jdbcType="INTEGER" />
+    <result column="CONFIRMDATE" property="confirmdate" jdbcType="TIMESTAMP" />
+    <result column="RECEIVEDBY" property="receivedby" jdbcType="INTEGER" />
+    <result column="RECEIVEDDATE" property="receiveddate" jdbcType="TIMESTAMP" />
+    <result column="ENDBY" property="endby" jdbcType="INTEGER" />
+    <result column="ENDDATE" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="ISSEEN" property="isseen" jdbcType="SMALLINT" />
+    <result column="ORDERTIPS" property="ordertips" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORDERID, CREATEDBY, ORDERDATE, ORDERNO, ORDSTATUS, AMOUNT, ADRESS, STOREID, CONFIRMBY, 
+    CONFIRMDATE, RECEIVEDBY, RECEIVEDDATE, ENDBY, ENDDATE, ISSEEN, ORDERTIPS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ORDERS
+    where ORDERID = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ORDERS
+    where ORDERID = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.user.po.Orders" >
+    insert into ORDERS (ORDERID, CREATEDBY, ORDERDATE, 
+      ORDERNO, ORDSTATUS, AMOUNT, 
+      ADRESS, STOREID, CONFIRMBY, 
+      CONFIRMDATE, RECEIVEDBY, RECEIVEDDATE, 
+      ENDBY, ENDDATE, ISSEEN, 
+      ORDERTIPS)
+    values (#{orderid,jdbcType=INTEGER}, #{createdby,jdbcType=INTEGER}, #{orderdate,jdbcType=TIMESTAMP}, 
+      #{orderno,jdbcType=VARCHAR}, #{ordstatus,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE}, 
+      #{adress,jdbcType=INTEGER}, #{storeid,jdbcType=INTEGER}, #{confirmby,jdbcType=INTEGER}, 
+      #{confirmdate,jdbcType=TIMESTAMP}, #{receivedby,jdbcType=INTEGER}, #{receiveddate,jdbcType=TIMESTAMP}, 
+      #{endby,jdbcType=INTEGER}, #{enddate,jdbcType=TIMESTAMP}, #{isseen,jdbcType=SMALLINT}, 
+      #{ordertips,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.user.po.Orders" >
+    insert into ORDERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        ORDERID,
+      </if>
+      <if test="createdby != null" >
+        CREATEDBY,
+      </if>
+      <if test="orderdate != null" >
+        ORDERDATE,
+      </if>
+      <if test="orderno != null" >
+        ORDERNO,
+      </if>
+      <if test="ordstatus != null" >
+        ORDSTATUS,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="adress != null" >
+        ADRESS,
+      </if>
+      <if test="storeid != null" >
+        STOREID,
+      </if>
+      <if test="confirmby != null" >
+        CONFIRMBY,
+      </if>
+      <if test="confirmdate != null" >
+        CONFIRMDATE,
+      </if>
+      <if test="receivedby != null" >
+        RECEIVEDBY,
+      </if>
+      <if test="receiveddate != null" >
+        RECEIVEDDATE,
+      </if>
+      <if test="endby != null" >
+        ENDBY,
+      </if>
+      <if test="enddate != null" >
+        ENDDATE,
+      </if>
+      <if test="isseen != null" >
+        ISSEEN,
+      </if>
+      <if test="ordertips != null" >
+        ORDERTIPS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="createdby != null" >
+        #{createdby,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null" >
+        #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="ordstatus != null" >
+        #{ordstatus,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="adress != null" >
+        #{adress,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null" >
+        #{storeid,jdbcType=INTEGER},
+      </if>
+      <if test="confirmby != null" >
+        #{confirmby,jdbcType=INTEGER},
+      </if>
+      <if test="confirmdate != null" >
+        #{confirmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivedby != null" >
+        #{receivedby,jdbcType=INTEGER},
+      </if>
+      <if test="receiveddate != null" >
+        #{receiveddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endby != null" >
+        #{endby,jdbcType=INTEGER},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isseen != null" >
+        #{isseen,jdbcType=SMALLINT},
+      </if>
+      <if test="ordertips != null" >
+        #{ordertips,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.user.po.Orders" >
+    update ORDERS
+    <set >
+      <if test="createdby != null" >
+        CREATEDBY = #{createdby,jdbcType=INTEGER},
+      </if>
+      <if test="orderdate != null" >
+        ORDERDATE = #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderno != null" >
+        ORDERNO = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="ordstatus != null" >
+        ORDSTATUS = #{ordstatus,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="adress != null" >
+        ADRESS = #{adress,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null" >
+        STOREID = #{storeid,jdbcType=INTEGER},
+      </if>
+      <if test="confirmby != null" >
+        CONFIRMBY = #{confirmby,jdbcType=INTEGER},
+      </if>
+      <if test="confirmdate != null" >
+        CONFIRMDATE = #{confirmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivedby != null" >
+        RECEIVEDBY = #{receivedby,jdbcType=INTEGER},
+      </if>
+      <if test="receiveddate != null" >
+        RECEIVEDDATE = #{receiveddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endby != null" >
+        ENDBY = #{endby,jdbcType=INTEGER},
+      </if>
+      <if test="enddate != null" >
+        ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isseen != null" >
+        ISSEEN = #{isseen,jdbcType=SMALLINT},
+      </if>
+      <if test="ordertips != null" >
+        ORDERTIPS = #{ordertips,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDERID = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.user.po.Orders" >
+    update ORDERS
+    set CREATEDBY = #{createdby,jdbcType=INTEGER},
+      ORDERDATE = #{orderdate,jdbcType=TIMESTAMP},
+      ORDERNO = #{orderno,jdbcType=VARCHAR},
+      ORDSTATUS = #{ordstatus,jdbcType=INTEGER},
+      AMOUNT = #{amount,jdbcType=DOUBLE},
+      ADRESS = #{adress,jdbcType=INTEGER},
+      STOREID = #{storeid,jdbcType=INTEGER},
+      CONFIRMBY = #{confirmby,jdbcType=INTEGER},
+      CONFIRMDATE = #{confirmdate,jdbcType=TIMESTAMP},
+      RECEIVEDBY = #{receivedby,jdbcType=INTEGER},
+      RECEIVEDDATE = #{receiveddate,jdbcType=TIMESTAMP},
+      ENDBY = #{endby,jdbcType=INTEGER},
+      ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+      ISSEEN = #{isseen,jdbcType=SMALLINT},
+      ORDERTIPS = #{ordertips,jdbcType=VARCHAR}
+    where ORDERID = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>

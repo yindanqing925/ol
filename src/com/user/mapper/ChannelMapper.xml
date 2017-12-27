@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.mapper.ChannelMapper" >
+  <resultMap id="BaseResultMap" type="com.user.po.Channel" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="MAINTAIN" property="maintain" jdbcType="VARCHAR" />
+    <result column="TIPS" property="tips" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TYPE, MAINTAIN, TIPS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from CHANNEL
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CHANNEL
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.user.po.Channel" >
+    insert into CHANNEL (ID, TYPE, MAINTAIN, 
+      TIPS)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{maintain,jdbcType=VARCHAR}, 
+      #{tips,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.user.po.Channel" >
+    insert into CHANNEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="maintain != null" >
+        MAINTAIN,
+      </if>
+      <if test="tips != null" >
+        TIPS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="maintain != null" >
+        #{maintain,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        #{tips,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.user.po.Channel" >
+    update CHANNEL
+    <set >
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="maintain != null" >
+        MAINTAIN = #{maintain,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        TIPS = #{tips,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.user.po.Channel" >
+    update CHANNEL
+    set TYPE = #{type,jdbcType=VARCHAR},
+      MAINTAIN = #{maintain,jdbcType=VARCHAR},
+      TIPS = #{tips,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

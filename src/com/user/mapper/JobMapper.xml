@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.user.mapper.JobMapper" >
+  <resultMap id="BaseResultMap" type="com.user.po.Job" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="USERID" property="userid" jdbcType="INTEGER" />
+    <result column="JOB" property="job" jdbcType="INTEGER" />
+    <result column="TIPS" property="tips" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USERID, JOB, TIPS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from JOB
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from JOB
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.user.po.Job" >
+    insert into JOB (ID, USERID, JOB, 
+      TIPS)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{job,jdbcType=INTEGER}, 
+      #{tips,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.user.po.Job" >
+    insert into JOB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="job != null" >
+        JOB,
+      </if>
+      <if test="tips != null" >
+        TIPS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=INTEGER},
+      </if>
+      <if test="tips != null" >
+        #{tips,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.user.po.Job" >
+    update JOB
+    <set >
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        JOB = #{job,jdbcType=INTEGER},
+      </if>
+      <if test="tips != null" >
+        TIPS = #{tips,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.user.po.Job" >
+    update JOB
+    set USERID = #{userid,jdbcType=INTEGER},
+      JOB = #{job,jdbcType=INTEGER},
+      TIPS = #{tips,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
